@@ -16,4 +16,20 @@ export class ActorService {
  list(): Observable<Actor[]> {
    return this.http.get(URL+'/') as Observable<Actor[]>;
  }
+
+ get(id: number): Observable<Actor> {
+  return this.http.get(URL+'/'+id) as Observable<Actor>;
+}
+
+create(actor: Actor): Observable<Actor> {
+ return this.http.post(URL+"/", actor) as Observable<Actor>;
+}
+
+edit(actor: Actor): Observable<Actor> {
+ return this.http.put(URL+"/", actor) as Observable<Actor>;
+}
+
+delete(id: number): Observable<Actor> {
+ return this.http.delete(URL+'/'+id) as Observable<Actor>;
+}
 }
