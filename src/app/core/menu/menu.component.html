@@ -1,0 +1,8 @@
+<nav>
+    <ul>
+      <img width='90' height='45' src='assets/bmdb-logo.png' title='Movie Details'>
+      <li *ngFor = 'let mi of menuItems' title="{{mi.tooltip}}">
+      <a routerLink='{{mi.href}}'>{{mi.display}}</a>
+    </li>  
+    </ul>
+</nav>
