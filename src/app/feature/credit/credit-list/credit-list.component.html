@@ -1,3 +1,8 @@
+<section class="heading">
+  <span class="page-title font-weight-bold-italic">[{{title}}]</span>
+  <a routerLink='/credit-create'>
+    <img width='20' height='20' src='assets/add-icon.png' title='Add New'>
+</a>
 <table class="table table-dark table-striped">
     <thead>
       <tr>
@@ -5,6 +10,7 @@
         <th scope="col">Movie Name</th>
         <th scope="col">Actor Name</th>
         <th scope="col">Role</th>
+        <th scope="col">Action</th>
       </tr>
     </thead>
     <tbody>
@@ -13,6 +19,14 @@
         <td>{{credit.movie.title}}</td>
         <td>{{credit.actor.firstName}} {{credit.actor.lastName}}</td>
         <td>{{credit.role}}</td>
+        <td>
+          <a routerLink='/credit-detail/{{credit.id}}'>
+            <img width='20' height='20' src='assets/details.png' title='Credit Details'>
+          </a> |
+          <a routerLink='/credit-edit/{{credit.id}}'>
+            <img width='20' height='20' src='assets/pencil-icon.png' title='Credit Movie'>
+          </a> 
+        </td>
       </tr>
     </tbody>
   </table>
