@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Actor } from 'src/app/model/actor.class';
 import { Credit } from 'src/app/model/credit.class';
 import { Movie } from 'src/app/model/movie.class';
 import { ActorService } from 'src/app/service/actor.service';
 import { CreditService } from 'src/app/service/credit.service';
 import { MovieService } from 'src/app/service/movie.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-credit-edit',
@@ -14,33 +14,43 @@ import { MovieService } from 'src/app/service/movie.service';
 })
 export class CreditEditComponent implements OnInit {
   title: string = 'Credit-Edit';
-  credit: Credit = new Credit();
+  credit: any = null;
   actors: Actor[] = [];
   movies: Movie[] = [];
+  creditId: number = 0;
 
   constructor(
     private creditSvc: CreditService,
     private actorSvc: ActorService,
     private movieSvc: MovieService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-        // Populate List of Actors
-        this.actorSvc.list().subscribe(
-          resp => {
-            this.actors = resp as Actor[];
-          },
-          err => { console.log(err); }
-        );
-        
-        // Populate List of Movies
-        this.movieSvc.list().subscribe(
-          resp => {
-            this.movies = resp as Movie[];
-          },
-          err => { console.log(err); }
-        );
+    // get the credit to edit
+    this.route.params.subscribe(parms => this.creditId = parms["id"]);
+    this.creditSvc.get(this.creditId).subscribe(
+      resp => {
+        this.credit = resp as Credit;
+      },
+      err => { console.log(err); }
+    );
+    // Populate List of Actors
+    this.actorSvc.list().subscribe(
+      resp => {
+        this.actors = resp as Actor[];
+      },
+      err => { console.log(err); }
+    );
+
+    // Populate List of Movies
+    this.movieSvc.list().subscribe(
+      resp => {
+        this.movies = resp as Movie[];
+      },
+      err => { console.log(err); }
+    );
   }
 
   save() {
@@ -61,6 +71,6 @@ export class CreditEditComponent implements OnInit {
   compMovie(a: Movie, b: Movie): boolean {
     return a && b && a.id === b.id;
   }
-  
+
 
 }

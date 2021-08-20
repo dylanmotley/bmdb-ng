@@ -9,7 +9,7 @@ export class User {
     email: string;
     collectionValue: number;
 
-    constructor(id: number = 0, username: string = ' ', password: string = ' ',
+    constructor(id: number = 0, username: string = '', password: string = '',
         firstName: string = ' ', lastName: string = ' ', phone: string = ' ', 
         email: string = ' ', collectionValue: number = 0) {
 
